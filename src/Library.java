@@ -1,6 +1,6 @@
-import com.sun.tools.javac.jvm.Gen;
-
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.ListIterator;
 
 public class Library {
     private Catalogue catalogue;
@@ -73,33 +73,40 @@ public class Library {
         char choice = In.nextChar();
         switch (choice) {
             case '1':
-                System.out.println("Books:");
+                System.out.println("The Library has the following books:");
                 while (itor.hasNext()) {
                     book = itor.next();
-                    System.out.format("Title: %s, Author: %s, Genre: %s\n", book.getTitle(), book.getAuthor(), book.getGenre());
+                    System.out.print(book.getTitle() + ",");
                 }
                 break;
             case '2':
                 break;
             case '3':
-                System.out.println("Authors:");
+                System.out.println("The Library has books in the following genres:");
                 while (itor.hasNext()) {
                     book = itor.next();
-                    System.out.println(book.getGenre());
+                    System.out.print(book.getGenre() + ",");
                 }
+                System.out.print('\b');
                 break;
             case '4':
                 break;
             case '5':
-                System.out.println("Authors:");
+                System.out.println("The following authors have books in this Library:");
                 while (itor.hasNext()) {
                     book = itor.next();
-                    System.out.println(book.getAuthor());
+                    System.out.print(book.getAuthor() + ",");
                 }
+                System.out.print('\b');
                 break;
             case '6':
                 break;
             case '7':
+                System.out.print("\nEnter a valid patron ID:");
+                int patronId = In.nextInt();
+                System.out.print("Enter the title of the book you wish to borrow:");
+                String title = In.nextLine();
+                System.out.println("Book loaned.");
                 break;
             case '8':
                 break;
@@ -124,6 +131,7 @@ public class Library {
         String patronName = In.nextLine();
         System.out.print("Patron added");
         patrons.add(new Patron(id, patronName));
+
     }
 
     private void removingPatron() {
@@ -138,7 +146,7 @@ public class Library {
         Author author = new Author(In.nextLine());
         System.out.print("Enter the genre:");
         Genre genre = new Genre(In.nextLine());
-        System.out.print("Added " + title + " to catalogue.");
+        System.out.println("Added " + title + " to catalogue.");
         Book book = new Book(title, author, genre);
         books.add(book);
     }
@@ -184,8 +192,11 @@ public class Library {
                 break;
             case 'R':
             default:
-                catalogueMenu();
+                use();
+                return;
         }
+
+        admin();
     }
 
     private void help() {
