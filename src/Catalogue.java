@@ -8,8 +8,16 @@ public class Catalogue {
         private List<Author> authors = new LinkedList<Author>();
         
      public Catalogue() {
-         library = new Library();
-         
+         this.library = library;
+        
      }
- }
-
+     
+    private void booksOnShelf() {
+    System.out.println();
+    System.out.print("Enter a choice: ");
+    System.out.print("The Library has the following books: ");
+    System.out.println(); 
+    
+    
+} 
+}
